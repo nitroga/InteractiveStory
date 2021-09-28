@@ -12,6 +12,9 @@ int rightwall = rnd.Next(19);
 bool townsquare = false;
 bool outskirts  = false;
 
+bool LeftChestOpen = false;
+bool RightChestOpen = false;
+
 string location; 
 
 
@@ -29,10 +32,67 @@ while(true) {
         string action = Console.ReadLine();
         action = action.ToLower();
         if(action == "go left") {
-            
+            if(leftwall < 5) {
+                if(LeftChestOpen == false) {
+                    Console.WriteLine("You have discovered a chest!");
+                    Console.WriteLine("Do you wanna open it? Yes or No");
+                    action = Console.ReadLine().ToLower();
+                    if(action == "yes") {
+                        LeftChestOpen = true;
+                        Console.WriteLine($"You got {rnd.Next(1,4)} materials");
+                    }
+                    else {
+                        Console.WriteLine("You went back to the Town Entrance");
+                        loop = 1;
+                    }
+                }
+            }
+            else if(leftwall > 4) {
+                Console.WriteLine("You see a tower");
+                Console.WriteLine("Do you wanna enter the tower? Yes or No");
+                action = Console.ReadLine().ToLower();
+                if(action == "yes") {
+                    Console.WriteLine("You entered the tower!");
+                }
+                else {
+                    Console.WriteLine("You went back to the Town Entrance");
+                    loop = 1;
+                }
+            }
         }
         else if(action == "go right") {
-
+            if(leftwall < 5) {
+                if(RightChestOpen == false) {
+                    Console.WriteLine("You have discovered a chest!");
+                    Console.WriteLine("Do you wanna open it? Yes or No");
+                    action = Console.ReadLine().ToLower();
+                    if(action == "yes") {
+                        RightChestOpen = true;
+                        Console.WriteLine($"You got {rnd.Next(1,4)} materials");
+                    }
+                    else {
+                        Console.WriteLine("You went back to the Town Entrance");
+                        loop = 1;
+                    }
+                }
+            }
+            else if(leftwall > 4 && leftwall < 7) {
+                Console.WriteLine("You found a tunnel");
+                Console.WriteLine("Do you wanna go down it? Yes or No");
+                action = Console.ReadLine().ToLower();
+            }
+            else if(leftwall > 6) {
+                Console.WriteLine("You see a tower");
+                Console.WriteLine("Do you wanna enter the tower? Yes or No");
+                action = Console.ReadLine().ToLower();
+                if(action == "yes") {
+                    Console.WriteLine("You entered the tower!");
+                }
+                else {
+                    Console.WriteLine("You went back to the Town Entrance");
+                    loop = 1;
+                }
+            }
         }
         else if(action == "go straight") {
             loop = 2;
