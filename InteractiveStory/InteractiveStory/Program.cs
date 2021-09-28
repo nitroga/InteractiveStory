@@ -12,7 +12,7 @@ int rightwall = rnd.Next(19);
 bool townsquare = false;
 bool outskirts  = false;
 
-string location;
+string location; 
 
 
 Console.WriteLine("Welcome traveller! What is your name?");
