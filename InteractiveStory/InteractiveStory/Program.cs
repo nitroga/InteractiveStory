@@ -31,21 +31,19 @@ Console.WriteLine("Welcome traveller! What is your name?");
 string name = Console.ReadLine();
 Console.WriteLine($"Welcome to {townname}, {name}. Feel free to take a look around");
 Console.ForegroundColor = ConsoleColor.Cyan;
-Console.WriteLine($"To choose an action to do, type the number before the action");
+Console.WriteLine($"To choose an action to do, type the number before the action\n");
 Console.ResetColor();
 
 while (true)
 {
     if (loop == 1)
     {
-        Console.WriteLine();
-        Console.WriteLine("You are at the Town Entrance");
-        Console.WriteLine();
+        countryside = 0;
+        Console.WriteLine("You are at the Town Entrance\n");
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("(1) Go left\n(2) Go right\n(3) Go straight\n(4) Leave Town");
         Console.ResetColor();
-        string action = Console.ReadLine();
-        action = action.ToLower();
+        string action = Console.ReadLine().ToLower();
         if (action == "1")
         {
             Console.Clear();
@@ -167,12 +165,14 @@ while (true)
         }
         else if (action == "4")
         {
+            countryside = 1;
             Console.Clear();
             loop = 3;
         }
 
         else
         {
+            Console.Clear();
             loop = 1;
         }
     }
@@ -184,19 +184,18 @@ while (true)
             townsquare = true;
             Console.WriteLine("New place discovered:");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Town Square");
+            Console.WriteLine("Town Square\n");
             Console.ResetColor();
-            Console.WriteLine();
         }
         else
         {
             Console.WriteLine("You are at the Town Square");
             loop = 2;
         }
-        Console.WriteLine("");
-        Console.WriteLine("(4) Go back");
-        string action = Console.ReadLine();
-        action = action.ToLower();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("\n(4) Go back");
+        Console.ResetColor();
+        string action = Console.ReadLine().ToLower();
 
         if (action == "4")
         {
@@ -221,90 +220,66 @@ while (true)
         }
         else
         {
-            Console.Clear();
             Console.WriteLine("You stand by the road connecting the town and the countryside");
             loop = 3;
         }
-        Console.WriteLine();
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("(1) Hitchhike\n(2) Go further into the countryside\n(3) Go towards town");
-        Console.ResetColor();
-        string action = Console.ReadLine();
-        action = action.ToLower();
+        if(countryside == 4) {
+            Console.Clear();
+            Console.WriteLine("You see a farm\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("(1) Enter the farm\n(2) Go further from town\n(3) Go towards town");
+            Console.ResetColor();                
+        }
+        else if(countryside == 0) {
+            Console.Clear();
+            loop = 1;
+        }
+        else {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\n(1) Hitchhike\n(2) Go further into the countryside\n(3) Go towards town");
+            Console.ResetColor();
+        }
+        string action = Console.ReadLine().ToLower();
 
         if (action == "1")
         {
-            
-        }
-        else if(action == "2") 
-        {
-            countryside ++;
-            if(countryside == 1) {
-                loop = 3;
-            }
-            else if(countryside == 2) {
-                loop = 3;
-            }
-            else if(countryside == 3) {
-                loop = 3;
-            }
-            else if(countryside == 4) {
-                Console.Clear();
-                Console.WriteLine("You see a farm\n");
+            Console.Clear();
+            int hitchhike = rnd.Next(4);
+            if(hitchhike == 0) {
+                Console.WriteLine("A vehicle appeared\nDriver: Where do you wanna go?\n");
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("(1) Enter the farm\n(2) Go further from town\n(3) Go towards town");
+                Console.WriteLine("(1) To the farm\n(2) To the town");
                 Console.ResetColor();
                 action = Console.ReadLine();
                 if(action == "1") {
-                    Console.WriteLine("A woman approaches you\nFarmer: Howdy! Who are you?\n\n(1) I am friend\n(2) I am traveller");
-                    action = Console.ReadLine();
-                    if(action == "1") {
-                        Console.WriteLine($"You: I come in peace. My name is {name}.\nWho are you?");
-                        Console.WriteLine("Farmer: My name is Sandra, I own this farm.");
-                    }
-                    else {
-                        Console.WriteLine($"You: I am {name}, a traveller from far away.\nWho are you?");
-                        Console.WriteLine("Farmer: Cool! We haven't had a traveller for ages now.\nFarmer: Call me Sandra");
-                    }
-                }
-                else if(action == "2") {
-                    countryside ++;
+                    Console.Clear();
+                    countryside = 4;
                 }
                 else {
-                    countryside --;
+                    Console.Clear();
+                    loop = 1;
                 }
                 
             }
+            else if(hitchhike == 1) {
+                Console.WriteLine("A vehicle appeared, but ignored you");
+            }
+            else {
+                Console.WriteLine("No vehicle appeared");
+            }
+        }
+        else if(action == "2") 
+        {
+            Console.Clear();
+            countryside++;
         }
 
         else
         {
-            countryside --;
-            if(countryside <= 0) {
-                loop = 1;
-            }
-            else if(countryside == 4) {
-                Console.Clear();
-                Console.WriteLine("You see a farm\n");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("(1) Enter the farm\n(2) Go further from town\n(3) Go towards town");
-                Console.ResetColor();                
-                action = Console.ReadLine();
-                if(action == "1") {
-                    
-                }
-                else if(action == "2") {
-                    countryside ++;
-                }
-                else {
-                    countryside --;
-                }
-            }
-            else {
-                
-                loop = 3;
-            }
+            Console.Clear();
+            countryside--;
         }
+        
     }
     else if (loop == 4)
     {
@@ -340,8 +315,7 @@ while (true)
             }
             if (WeaponQuest == false)
             {
-                Console.WriteLine();
-                Console.WriteLine("I have a quest for you.");
+                Console.WriteLine("\nI have a quest for you.");
                 Console.WriteLine("We have a lack of weapons, can you bring me:");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("1 Stone Sword, 1 Iron Sword, 1 Bow & 10 Arrows.");
