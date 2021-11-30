@@ -193,18 +193,44 @@ while (true)
             loop = 2;
         }
         Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\n(4) Go back");
+        Console.WriteLine("(1) Go left\n(2) Go right\n(3) Go straight\n(4) Enter the hotel\n(5) Enter the bar\n(6) Go back");
         Console.ResetColor();
         string action = Console.ReadLine().ToLower();
+        if(action == "1") {
+        Console.WriteLine("You are on _ street ");
+        }
+        if(action == "2") {
+            Console.WriteLine("You are on _ street");
+        }
+        if(action == "3") {
+            Console.WriteLine("You are on _ street");
+        }
+        if(action == "4") {
+            Console.WriteLine("You are at the hotel\n\nReceptionist: Welcome! What are you here for?");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("(1) Rent a room | Cost: 5 coins (2) Go outside");
+            Console.ResetColor();
+            action = Console.ReadLine().ToLower();
+            if(action == "1") {
+                if(coins >= 5) {
+                    coins -= 5;
+                    Console.WriteLine("Receptionist: Your room is 101");
+                }
+                else {
+                    Console.WriteLine("Receptionist: You can't afford a room");
+                }
+            }
+            else {
 
-        if (action == "4")
-        {
-            loop = 1;
+            }
+        }
+        if(action == "5") {
+            Console.WriteLine("You are at the bar");
         }
 
-        else
+        else 
         {
-            loop = 2;
+            loop = 1;
         }
     }
 
@@ -228,7 +254,7 @@ while (true)
             Console.WriteLine("You see a farm\n");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("(1) Enter the farm\n(2) Go further from town\n(3) Go towards town");
-            Console.ResetColor();                
+            Console.ResetColor();                            
         }
         else if(countryside == 0) {
             Console.Clear();
